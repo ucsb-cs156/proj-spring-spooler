@@ -27,3 +27,16 @@ The next steps are these (they may have been taken yet--this README should be up
 * Add github actions to publish the module to Maven Central
 * Make a branch of proj-courses that uses this as the job system instead of the one built into proj-courses
 * Add that into dining, happycows, and frontiers as well
+
+## Thoughts
+Maybe the minimum that's needed in this package is
+
+* job entity
+* the four clases under services/jobs
+
+And then everything in a client application that is using this module would create their own classes that implement JobContextConsumer.  And that's where the application specific stuff goes.
+
+We might also be able to standardize some of the feeatures of the jobs controller..but we would split what's in JobsController in course right now into two parts:  
+* The parts that launch application specific jobs
+* The parts that are generic (e.g. the parts for getting job entities from the database and paginating them)
+
