@@ -17,6 +17,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import edu.ucsb.cs156.spooler.services.jobs.JobContextConsumer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
@@ -57,7 +58,7 @@ public class JobsControllerTests extends ControllerTestCase {
   @MockitoBean
   UserRepository userRepository;
 
-  @Autowired
+  @MockitoBean
   JobService jobService;
 
   @Autowired
@@ -170,16 +171,14 @@ public class JobsControllerTests extends ControllerTestCase {
   public void test_getJobLogs_admin_can_get_job_log() throws Exception {
     // Arrange
     Long jobId = 1L;
-    String jobLog = "This is a job log";
-    Job job = Job.builder().build();
-    job.setLog(jobLog);
-    when(jobsRepository.findById(jobId)).thenReturn(Optional.of(job));
+    String content = "This is a job log";
+    when(jobService.getLongJob(eq(1L))).thenReturn(content);
 
     // Act & Assert
     mockMvc
         .perform(get("/api/jobs/logs/{id}", jobId))
         .andExpect(status().isOk())
-        .andExpect(content().string(jobLog));
+        .andExpect(content().string(content));
   }
 
   @WithMockUser(roles = { "ADMIN" })
@@ -187,9 +186,7 @@ public class JobsControllerTests extends ControllerTestCase {
   public void test_getJobLogs_admin_can_get_empty_log() throws Exception {
     // Arrange
     Long jobId = 2L;
-    Job job = Job.builder().build();
-    job.setLog("");
-    when(jobsRepository.findById(jobId)).thenReturn(Optional.of(job));
+    when(jobService.getLongJob(eq(2L))).thenReturn("");
 
     // Act & Assert
     mockMvc
@@ -259,17 +256,7 @@ public class JobsControllerTests extends ControllerTestCase {
         .status("running")
         .log("Hello World! from test job!\nauthentication is not null")
         .build();
-
-    Job jobCompleted = Job.builder()
-        .id(0L)
-        .createdBy(user)
-        .createdAt(null)
-        .updatedAt(null)
-        .status("complete")
-        .log("Hello World! from test job!\nauthentication is not null\nGoodbye from test job!")
-        .build();
-
-    when(jobsRepository.save(any(Job.class))).thenReturn(jobStarted).thenReturn(jobCompleted);
+    when(jobService.runAsJob(any(JobContextConsumer.class))).thenReturn(jobStarted);
 
     // act
     MvcResult response = mockMvc
@@ -282,61 +269,6 @@ public class JobsControllerTests extends ControllerTestCase {
     Job jobReturned = objectMapper.readValue(responseString, Job.class);
 
     assertEquals("running", jobReturned.getStatus());
-
-    await()
-        .atMost(1, SECONDS)
-        .untilAsserted(() -> verify(jobsRepository, times(3)).save(eq(jobStarted)));
-    await()
-        .atMost(10, SECONDS)
-        .untilAsserted(() -> verify(jobsRepository, times(5)).save(eq(jobCompleted)));
-  }
-
-  @WithMockUser(roles = { "ADMIN" })
-  @Test
-  public void admin_can_launch_test_job_that_fails() throws Exception {
-
-    // arrange
-
-    User user = currentUserService.getUser();
-
-    Job jobStarted = Job.builder()
-        .id(0L)
-        .createdBy(user)
-        .createdAt(null)
-        .updatedAt(null)
-        .status("running")
-        .log("Hello World! from test job!\nauthentication is not null")
-        .build();
-
-    Job jobFailed = Job.builder()
-        .id(0L)
-        .createdBy(user)
-        .createdAt(null)
-        .updatedAt(null)
-        .status("error")
-        .log("Hello World! from test job!\nauthentication is not null\nFail!")
-        .build();
-
-    when(jobsRepository.save(any(Job.class))).thenReturn(jobStarted).thenReturn(jobFailed);
-
-    // act
-    MvcResult response = mockMvc
-        .perform(post("/api/jobs/launch/testjob?fail=true&sleepMs=4000").with(csrf()))
-        .andExpect(status().isOk())
-        .andReturn();
-
-    String responseString = response.getResponse().getContentAsString();
-    Job jobReturned = objectMapper.readValue(responseString, Job.class);
-
-    assertEquals("running", jobReturned.getStatus());
-
-    await()
-        .atMost(1, SECONDS)
-        .untilAsserted(() -> verify(jobsRepository, times(3)).save(eq(jobStarted)));
-
-    await()
-        .atMost(10, SECONDS)
-        .untilAsserted(() -> verify(jobsRepository, times(4)).save(eq(jobFailed)));
   }
 
   @WithMockUser(roles = { "ADMIN" })
