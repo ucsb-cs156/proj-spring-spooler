@@ -1,11 +1,10 @@
 package edu.ucsb.cs156.spooler.startup;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import edu.ucsb.cs156.spooler.jobs.TestJob;
 import edu.ucsb.cs156.spooler.services.jobs.JobService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /** This class contains a `run` method that is called once at application startup time. */
 @Slf4j

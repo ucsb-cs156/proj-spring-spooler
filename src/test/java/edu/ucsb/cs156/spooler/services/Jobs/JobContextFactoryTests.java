@@ -17,11 +17,9 @@ import org.mockito.MockitoAnnotations;
 
 public class JobContextFactoryTests {
 
-  @Mock
-  private JobsRepository jobsRepository;
+  @Mock private JobsRepository jobsRepository;
 
-  @InjectMocks
-  private JobContextFactory contextFactory;
+  @InjectMocks private JobContextFactory contextFactory;
 
   @BeforeEach
   public void setup() {
@@ -43,5 +41,4 @@ public class JobContextFactoryTests {
       assertEquals(createdContext, constructedMock);
     }
   }
-
 }

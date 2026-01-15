@@ -1,7 +1,5 @@
 package edu.ucsb.cs156.spooler.services;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.awaitility.Awaitility.await;
 import static org.hamcrest.Matchers.samePropertyValuesAs;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -22,20 +20,15 @@ import edu.ucsb.cs156.spooler.repositories.JobsRepository;
 import edu.ucsb.cs156.spooler.services.jobs.JobContext;
 import edu.ucsb.cs156.spooler.services.jobs.JobContextFactory;
 import edu.ucsb.cs156.spooler.services.jobs.JobService;
-import edu.ucsb.cs156.spooler.testconfig.TestConfig;
 import java.util.List;
 import java.util.Optional;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.context.annotation.Import;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 public class JobServiceTests {
 
@@ -60,7 +53,6 @@ public class JobServiceTests {
             .roles(List.of(new SimpleGrantedAuthority("ROLE_ADMIN")))
             .user(User.builder().id(1L).build())
             .build();
-
   }
 
   @Test

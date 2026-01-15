@@ -3,9 +3,7 @@ package edu.ucsb.cs156.spooler.jobs;
 import edu.ucsb.cs156.spooler.services.jobs.JobContext;
 import edu.ucsb.cs156.spooler.services.jobs.JobContextConsumer;
 import edu.ucsb.cs156.spooler.services.jobs.Sleeper;
-import java.util.concurrent.TimeUnit;
 import lombok.Builder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
