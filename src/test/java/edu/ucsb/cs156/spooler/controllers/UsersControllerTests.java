@@ -7,15 +7,16 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.ucsb.cs156.spooler.ControllerTestCase;
+import edu.ucsb.cs156.spooler.entities.User;
+import edu.ucsb.cs156.spooler.repositories.UserRepository;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -23,13 +24,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MvcResult;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import edu.ucsb.cs156.spooler.ControllerTestCase;
-import edu.ucsb.cs156.spooler.entities.User;
-import edu.ucsb.cs156.spooler.repositories.UserRepository;
-import edu.ucsb.cs156.spooler.testconfig.TestConfig;
 
 @WebMvcTest(controllers = UsersController.class)
 public class UsersControllerTests extends ControllerTestCase {

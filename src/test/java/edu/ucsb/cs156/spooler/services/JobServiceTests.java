@@ -1,6 +1,5 @@
 package edu.ucsb.cs156.spooler.services;
 
-import static org.awaitility.Awaitility.await;
 import static org.hamcrest.Matchers.samePropertyValuesAs;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -15,12 +14,12 @@ import static org.mockito.Mockito.when;
 
 import edu.ucsb.cs156.spooler.entities.Job;
 import edu.ucsb.cs156.spooler.entities.User;
-import edu.ucsb.cs156.spooler.testconfig.TestJob;
 import edu.ucsb.cs156.spooler.models.CurrentUser;
 import edu.ucsb.cs156.spooler.repositories.JobsRepository;
 import edu.ucsb.cs156.spooler.services.jobs.JobContext;
 import edu.ucsb.cs156.spooler.services.jobs.JobContextFactory;
 import edu.ucsb.cs156.spooler.services.jobs.JobService;
+import edu.ucsb.cs156.spooler.testconfig.TestJob;
 import java.util.List;
 import java.util.Optional;
 import org.hamcrest.MatcherAssert;
@@ -54,7 +53,6 @@ public class JobServiceTests {
             .roles(List.of(new SimpleGrantedAuthority("ROLE_ADMIN")))
             .user(User.builder().id(1L).build())
             .build();
-
   }
 
   @Test
@@ -147,6 +145,4 @@ public class JobServiceTests {
     verify(contextFactory).createContext(eq(passedJob));
     assertEquals("error", passedJob.getStatus());
   }
-
-
 }

@@ -14,24 +14,20 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 @SpringBootTest
 @Import(TestConfig.class)
 public class AsyncJobTestsIT {
 
-  @Autowired
-  private JobService jobService;
+  @Autowired private JobService jobService;
 
-  @Autowired
-  private JobContextFactory contextFactory;
+  @Autowired private JobContextFactory contextFactory;
 
-  @MockitoBean
-  private JobsRepository jobsRepository;
+  @MockitoBean private JobsRepository jobsRepository;
 
   @Test
-  void async_job_actually_runs_asynchronously(){
+  void async_job_actually_runs_asynchronously() {
     TestJob testJob = TestJob.builder().fail(false).sleepMs(2000).build();
     Job job = jobService.runAsJob(testJob);
     assertEquals("running", job.getStatus(), "Job should be running");
