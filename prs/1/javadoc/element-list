@@ -1,0 +1,12 @@
+edu.ucsb.cs156.spooler
+edu.ucsb.cs156.spooler.aop
+edu.ucsb.cs156.spooler.config
+edu.ucsb.cs156.spooler.controllers
+edu.ucsb.cs156.spooler.entities
+edu.ucsb.cs156.spooler.errors
+edu.ucsb.cs156.spooler.jobs
+edu.ucsb.cs156.spooler.models
+edu.ucsb.cs156.spooler.repositories
+edu.ucsb.cs156.spooler.services
+edu.ucsb.cs156.spooler.services.jobs
+edu.ucsb.cs156.spooler.startup
