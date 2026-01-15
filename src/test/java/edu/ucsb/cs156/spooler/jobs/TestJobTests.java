@@ -1,6 +1,7 @@
 package edu.ucsb.cs156.spooler.jobs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.times;
 
@@ -70,5 +71,12 @@ public class TestJobTests {
       testJob.accept(new JobContext(null, Job.builder().build()));
       mock.verify(() -> Sleeper.sleep(anyLong()), times(1));
     }
+  }
+
+  @Test
+  void test_failing_job() throws Exception {
+    TestJob testJob = TestJob.builder().sleepMs(0).fail(true).build();
+    JobContext ctx = new JobContext(null, Job.builder().build());
+    assertThrows(Exception.class, () -> testJob.accept(ctx));
   }
 }
