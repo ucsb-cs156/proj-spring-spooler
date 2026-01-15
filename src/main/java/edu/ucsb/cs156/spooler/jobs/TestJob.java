@@ -2,6 +2,7 @@ package edu.ucsb.cs156.spooler.jobs;
 
 import edu.ucsb.cs156.spooler.services.jobs.JobContext;
 import edu.ucsb.cs156.spooler.services.jobs.JobContextConsumer;
+import edu.ucsb.cs156.spooler.services.jobs.Sleeper;
 import lombok.Builder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,7 +24,7 @@ public class TestJob implements JobContextConsumer {
     } else {
       ctx.log("authentication is not null");
     }
-    Thread.sleep(sleepMs);
+    Sleeper.sleep(sleepMs);
     if (fail) {
       throw new Exception("Fail!");
     }

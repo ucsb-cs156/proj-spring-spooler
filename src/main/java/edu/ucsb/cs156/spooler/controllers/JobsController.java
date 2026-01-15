@@ -34,11 +34,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class JobsController extends ApiController {
   @Autowired private JobsRepository jobsRepository;
 
-
   @Autowired private JobService jobService;
 
   @Autowired ObjectMapper mapper;
-
 
   @Operation(summary = "List all jobs")
   @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -91,8 +89,6 @@ public class JobsController extends ApiController {
     return jobService.runAsJob(testJob);
   }
 
-
-
   @Operation(summary = "Get long job logs")
   @PreAuthorize("hasRole('ROLE_ADMIN')")
   @GetMapping("/logs/{id}")
@@ -100,8 +96,6 @@ public class JobsController extends ApiController {
 
     return jobService.getLongJob(id);
   }
-
-
 
   @Operation(summary = "Get paginated jobs")
   @PreAuthorize("hasRole('ROLE_ADMIN')")
