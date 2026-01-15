@@ -257,11 +257,13 @@
                         <param>edu.ucsb.cs156.spooler.config.SpringFoxConfig</param>
                         <param>edu.ucsb.cs156.spooler.config.MongoConfig</param>
                         <param>edu.ucsb.cs156.spooler.config.MongoDevConfig</param>
+                        <param>edu.ucsb.cs156.spooler.config.JpaAuditingConfig</param>
                         <param>edu.ucsb.cs156.spooler.startup.CoursesStartup</param>
                         <param>edu.ucsb.cs156.spooler.startup.CoursesApplicationRunnerDevelopment</param>
                         <param>edu.ucsb.cs156.spooler.startup.CoursesApplicationRunnerProduction</param>
                         <param>edu.ucsb.cs156.spooler.jobs.ScheduledJobs</param>
                         <param>edu.ucsb.cs156.spooler.config.RestTemplateConfig</param>
+                        <param>edu.ucsb.cs156.spooler.services.jobs.Sleeper</param>
                     </excludedClasses>
                     <excludedTestClasses>
                         <param>edu.ucsb.cs156.example.integration.*</param>

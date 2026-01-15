@@ -22,8 +22,6 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MvcResult;
 
 @WebMvcTest(controllers = UsersController.class)
-@Import(TestConfig.class)
-@AutoConfigureDataJpa
 public class ApiControllerTests extends ControllerTestCase {
 
   @MockitoBean UserRepository userRepository;

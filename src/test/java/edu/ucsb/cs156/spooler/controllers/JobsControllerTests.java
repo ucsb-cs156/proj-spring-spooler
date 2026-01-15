@@ -48,8 +48,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @WebMvcTest(controllers = JobsController.class)
-@Import(JobService.class)
-@AutoConfigureDataJpa
 public class JobsControllerTests extends ControllerTestCase {
 
   @MockitoBean
