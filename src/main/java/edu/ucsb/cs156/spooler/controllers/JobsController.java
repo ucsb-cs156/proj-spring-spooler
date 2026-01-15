@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.ucsb.cs156.spooler.entities.Job;
 import edu.ucsb.cs156.spooler.errors.EntityNotFoundException;
-import edu.ucsb.cs156.spooler.jobs.TestJob;
 import edu.ucsb.cs156.spooler.repositories.JobsRepository;
 import edu.ucsb.cs156.spooler.services.jobs.JobService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,7 +21,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,11 +32,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class JobsController extends ApiController {
   @Autowired private JobsRepository jobsRepository;
 
-
   @Autowired private JobService jobService;
 
   @Autowired ObjectMapper mapper;
-
 
   @Operation(summary = "List all jobs")
   @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -80,19 +76,6 @@ public class JobsController extends ApiController {
     return Map.of("message", String.format("Job with id %d deleted", id));
   }
 
-  @Operation(summary = "Launch Test Job (click fail if you want to test exception handling)")
-  @PreAuthorize("hasRole('ROLE_ADMIN')")
-  @PostMapping("/launch/testjob")
-  public Job launchTestJob(
-      @Parameter(name = "fail") @RequestParam Boolean fail,
-      @Parameter(name = "sleepMs") @RequestParam Integer sleepMs) {
-
-    TestJob testJob = TestJob.builder().fail(fail).sleepMs(sleepMs).build();
-    return jobService.runAsJob(testJob);
-  }
-
-
-
   @Operation(summary = "Get long job logs")
   @PreAuthorize("hasRole('ROLE_ADMIN')")
   @GetMapping("/logs/{id}")
@@ -100,8 +83,6 @@ public class JobsController extends ApiController {
 
     return jobService.getLongJob(id);
   }
-
-
 
   @Operation(summary = "Get paginated jobs")
   @PreAuthorize("hasRole('ROLE_ADMIN')")
