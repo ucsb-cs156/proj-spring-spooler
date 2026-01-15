@@ -48,8 +48,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @WebMvcTest(controllers = JobsController.class)
-@Import(JobService.class)
-@AutoConfigureDataJpa
 public class JobsControllerTests extends ControllerTestCase {
 
   @MockitoBean
@@ -238,37 +236,6 @@ public class JobsControllerTests extends ControllerTestCase {
     String expectedJson = mapper.writeValueAsString(Map.of("message", "Job with id 2 not found"));
     String responseString = response.getResponse().getContentAsString();
     assertEquals(expectedJson, responseString);
-  }
-
-  @WithMockUser(roles = { "ADMIN" })
-  @Test
-  public void admin_can_launch_test_job() throws Exception {
-
-    // arrange
-
-    User user = currentUserService.getUser();
-
-    Job jobStarted = Job.builder()
-        .id(0L)
-        .createdBy(user)
-        .createdAt(null)
-        .updatedAt(null)
-        .status("running")
-        .log("Hello World! from test job!\nauthentication is not null")
-        .build();
-    when(jobService.runAsJob(any(JobContextConsumer.class))).thenReturn(jobStarted);
-
-    // act
-    MvcResult response = mockMvc
-        .perform(post("/api/jobs/launch/testjob?fail=false&sleepMs=2000").with(csrf()))
-        .andExpect(status().isOk())
-        .andReturn();
-
-    // assert
-    String responseString = response.getResponse().getContentAsString();
-    Job jobReturned = objectMapper.readValue(responseString, Job.class);
-
-    assertEquals("running", jobReturned.getStatus());
   }
 
   @WithMockUser(roles = { "ADMIN" })

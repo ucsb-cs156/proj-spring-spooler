@@ -18,8 +18,6 @@ import edu.ucsb.cs156.spooler.testconfig.TestConfig;
 
 @ActiveProfiles("development")
 @WebMvcTest(controllers = CSRFController.class)
-@Import(TestConfig.class)
-@AutoConfigureDataJpa
 public class CSRFControllerTests extends ControllerTestCase {
 
   @MockitoBean UserRepository userRepository;

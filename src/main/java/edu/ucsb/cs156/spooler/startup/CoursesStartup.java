@@ -3,7 +3,6 @@ package edu.ucsb.cs156.spooler.startup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import edu.ucsb.cs156.spooler.jobs.TestJob;
 import edu.ucsb.cs156.spooler.services.jobs.JobService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,9 +20,6 @@ public class CoursesStartup {
   public void alwaysRunOnStartup() {
     log.info("alwaysRunOnStartup called");
 
-    TestJob testJob = TestJob.builder().fail(false).sleepMs(1000).build();
-    jobService.runAsJob(testJob);
-
     log.info("alwaysRunOnStartup: launched testJob");
   }
 
@@ -34,8 +30,6 @@ public class CoursesStartup {
   public void runOnStartupInProductionOnly() {
     log.info("runOnStartupInProductionOnly called");
 
-    TestJob testJob = TestJob.builder().fail(false).sleepMs(1000).build();
-    jobService.runAsJob(testJob);
 
     log.info("runOnStartupInProductionOnly: launched testJob");
   }

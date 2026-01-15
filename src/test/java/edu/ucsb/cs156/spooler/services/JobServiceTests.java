@@ -1,6 +1,5 @@
 package edu.ucsb.cs156.spooler.services;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
 import static org.hamcrest.Matchers.samePropertyValuesAs;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,7 +15,7 @@ import static org.mockito.Mockito.when;
 
 import edu.ucsb.cs156.spooler.entities.Job;
 import edu.ucsb.cs156.spooler.entities.User;
-import edu.ucsb.cs156.spooler.jobs.TestJob;
+import edu.ucsb.cs156.spooler.testconfig.TestJob;
 import edu.ucsb.cs156.spooler.models.CurrentUser;
 import edu.ucsb.cs156.spooler.repositories.JobsRepository;
 import edu.ucsb.cs156.spooler.services.jobs.JobContext;

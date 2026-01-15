@@ -32,8 +32,6 @@ import edu.ucsb.cs156.spooler.repositories.UserRepository;
 import edu.ucsb.cs156.spooler.testconfig.TestConfig;
 
 @WebMvcTest(controllers = UsersController.class)
-@Import(TestConfig.class)
-@AutoConfigureDataJpa
 public class UsersControllerTests extends ControllerTestCase {
 
   @MockitoBean UserRepository userRepository;

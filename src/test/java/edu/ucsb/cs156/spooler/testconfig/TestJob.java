@@ -1,4 +1,4 @@
-package edu.ucsb.cs156.spooler.jobs;
+package edu.ucsb.cs156.spooler.testconfig;
 
 import edu.ucsb.cs156.spooler.services.jobs.JobContext;
 import edu.ucsb.cs156.spooler.services.jobs.JobContextConsumer;

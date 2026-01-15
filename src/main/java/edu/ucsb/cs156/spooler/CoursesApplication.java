@@ -16,7 +16,6 @@ import org.springframework.security.task.DelegatingSecurityContextAsyncTaskExecu
 
 @SpringBootApplication(
     excludeName = {"de.flapdoodle.embed.mongo.spring.autoconfigure.EmbeddedMongoAutoConfiguration"})
-@EnableJpaAuditing(dateTimeProviderRef = "utcDateTimeProvider")
 // enables automatic population of @CreatedDate and @LastModifiedDate
 @EnableAsync // for @Async annotation for JobsService
 @EnableScheduling // for @Scheduled annotation for JobsService
@@ -24,14 +23,6 @@ public class CoursesApplication {
 
   public static void main(String[] args) {
     SpringApplication.run(CoursesApplication.class, args);
-  }
-
-  @Bean
-  public DateTimeProvider utcDateTimeProvider() {
-    return () -> {
-      ZonedDateTime now = ZonedDateTime.now();
-      return Optional.of(now);
-    };
   }
 
   // See: https://www.baeldung.com/spring-security-async-principal-propagation

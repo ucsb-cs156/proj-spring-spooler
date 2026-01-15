@@ -257,6 +257,7 @@
                         <param>edu.ucsb.cs156.spooler.config.SpringFoxConfig</param>
                         <param>edu.ucsb.cs156.spooler.config.MongoConfig</param>
                         <param>edu.ucsb.cs156.spooler.config.MongoDevConfig</param>
+                        <param>edu.ucsb.cs156.spooler.config.JpaAuditingConfig</param>
                         <param>edu.ucsb.cs156.spooler.startup.CoursesStartup</param>
                         <param>edu.ucsb.cs156.spooler.startup.CoursesApplicationRunnerDevelopment</param>
                         <param>edu.ucsb.cs156.spooler.startup.CoursesApplicationRunnerProduction</param>
