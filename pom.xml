@@ -213,6 +213,7 @@
                         <exclude>**/edu/ucsb/cs156/spooler/CoursesApplicationRunner*.*</exclude>
                         <exclude>**/edu/ucsb/cs156/spooler/startup/*</exclude>
                         <exclude>**/edu/ucsb/cs156/spooler/jobs/ScheduledJobs.*</exclude>
+			<exclude>**/edu/ucsb/cs156/spooler/services/jobs/Sleeper.*</exclude>
                     </excludes>
                 </configuration>
 
