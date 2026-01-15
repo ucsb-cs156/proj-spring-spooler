@@ -25,8 +25,8 @@ public class TestJob implements JobContextConsumer {
 <span class="fc" id="L25">      ctx.log(&quot;authentication is not null&quot;);</span>
     }
 <span class="fc" id="L27">    Sleeper.sleep(sleepMs);</span>
-<span class="pc bpc" id="L28" title="1 of 2 branches missed.">    if (fail) {</span>
-<span class="nc" id="L29">      throw new Exception(&quot;Fail!&quot;);</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">    if (fail) {</span>
+<span class="fc" id="L29">      throw new Exception(&quot;Fail!&quot;);</span>
     }
 <span class="fc" id="L31">    ctx.log(&quot;Goodbye from test job!&quot;);</span>
 <span class="fc" id="L32">  }</span>
